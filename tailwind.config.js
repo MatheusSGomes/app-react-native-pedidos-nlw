@@ -5,7 +5,14 @@ module.exports = {
     "./src/components/**/*.{ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        body: "Inter_400Regular",
+        heading: "Inter_600SemiBold",
+        subtitle: "Inter_500Medium",
+        bold: "Inter_700Bold",
+      }
+    },
   },
   plugins: [],
 }
