@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, ScrollView, Alert } from "react-native";
+import { View, Text, ScrollView, Alert, Linking } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "expo-router";
 import { ProductCartProps, useCartStore } from "@/stores/cart-store";
@@ -13,6 +13,8 @@ import { Button } from "@/components/button";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { LinkButton } from "@/components/link-button";
+
+const PHONE_NUMBER = "5561992404572";
 
 export default function Cart() {
   const [address, setAddress] = useState("");
@@ -54,7 +56,10 @@ export default function Cart() {
     \n Valor total: ${total}
     `;
 
-    console.log(message);
+    Linking.openURL(
+      `http://api.whatsapp.com/send?phone=${PHONE_NUMBER}&text=${message}`
+    );
+
     cartStore.clear();
     navigation.goBack();
   }
@@ -93,7 +98,9 @@ export default function Cart() {
             <Input
               placeholder="Informe o endereço de entrega com rua, bairro, CEP, número e complemento..."
               onChangeText={setAddress}
+              blurOnSubmit={true}
               onSubmitEditing={handleOrder}
+              returnKeyType="next"
             />
           </View>
         </ScrollView>
